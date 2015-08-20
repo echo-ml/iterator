@@ -20,8 +20,9 @@ class StridedIterator : public boost::iterator_facade<
                             iterator_traits::reference<RandomAccessIterator>>,
                         htl::Pack<Stride> {
  public:
-  explicit StridedIterator(RandomAccessIterator iterator,
-                           Stride stride = Stride())
+  explicit StridedIterator(
+      RandomAccessIterator iterator = RandomAccessIterator(),
+      Stride stride = Stride())
       : htl::Pack<Stride>(stride), _iterator(iterator) {
     CONTRACT_EXPECT { CONTRACT_ASSERT(stride >= 1); };
   }
@@ -36,7 +37,7 @@ class StridedIterator : public boost::iterator_facade<
     return this->_iterator == other._iterator;
   }
 
-  void advance(index_t n) { _iterator += n * htl::unpack(*this); }
+  void advance(ptrdiff_t n) { _iterator += n * htl::unpack(*this); }
 
   void increment() { _iterator += htl::unpack(*this); }
 

@@ -1,6 +1,7 @@
 #include <echo/iterator/strided_iterator.h>
 #include <echo/test.h>
 #include <numeric>
+#include <vector>
 
 using namespace echo;
 using namespace echo::iterator;
@@ -24,4 +25,6 @@ TEST_CASE("strided_iterator") {
   CHECK(*std::prev(std::next(i2)) == 0);
   CHECK(*std::next(i2, 1) == 2);
   CHECK(*std::prev(std::next(i2,1),1) == 0);
+
+  CHECK(echo::concept::random_access_iterator<decltype(i1)>());
 }
