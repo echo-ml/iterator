@@ -23,9 +23,7 @@ class StridedIterator : public boost::iterator_facade<
   explicit StridedIterator(
       RandomAccessIterator iterator = RandomAccessIterator(),
       Stride stride = Stride())
-      : htl::Pack<Stride>(stride), _iterator(iterator) {
-    CONTRACT_EXPECT { CONTRACT_ASSERT(stride >= 1); };
-  }
+      : htl::Pack<Stride>(stride), _iterator(iterator) {}
 
  private:
   friend class boost::iterator_core_access;
